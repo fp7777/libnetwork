@@ -174,6 +174,7 @@ func (d *driver) DeleteNetwork(nid string) error {
 }
 
 func (d *driver) CreateEndpoint(nid, eid string, ifInfo driverapi.InterfaceInfo, epOptions map[string]interface{}) error {
+	logrus.Warn("DEBUG driver.go CreateEndpoint - BEGIN")
 	if ifInfo == nil {
 		return errors.New("must not be called with nil InterfaceInfo")
 	}
@@ -225,6 +226,7 @@ func (d *driver) CreateEndpoint(nid, eid string, ifInfo driverapi.InterfaceInfo,
 		}
 	}
 
+	logrus.Warn("DEBUG driver.go CreateEndpoint - END")
 	return nil
 }
 
@@ -258,6 +260,7 @@ func (d *driver) EndpointOperInfo(nid, eid string) (map[string]interface{}, erro
 
 // Join method is invoked when a Sandbox is attached to an endpoint.
 func (d *driver) Join(nid, eid string, sboxKey string, jinfo driverapi.JoinInfo, options map[string]interface{}) error {
+	logrus.Warn("DEBUG driver.go Join - BEGIN")
 	join := &api.JoinRequest{
 		NetworkID:  nid,
 		EndpointID: eid,
@@ -310,6 +313,7 @@ func (d *driver) Join(nid, eid string, sboxKey string, jinfo driverapi.JoinInfo,
 	if res.DisableGatewayService {
 		jinfo.DisableGatewayService()
 	}
+	logrus.Warn("DEBUG driver.go Join - END")
 	return nil
 }
 
